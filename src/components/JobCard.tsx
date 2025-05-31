@@ -75,12 +75,20 @@ const JobCard = ({ job, isCurrentJob = false }: JobCardProps) => {
         </div>
       )}
       
-      <div className="flex items-center justify-between text-sm text-gray-500">
-        <div className="flex items-center">
-          <Clock className="h-4 w-4 mr-1" />
-          <span>Est. {job.estimatedTime}</span>
+      <div className="flex flex-col space-y-2">
+        <div className="flex items-center justify-between text-sm text-gray-500">
+          <div className="flex items-center">
+            <Clock className="h-4 w-4 mr-1" />
+            <span>Est. {job.estimatedTime}</span>
+          </div>
+          <span>Equipment: {job.equipment.join(', ')}</span>
         </div>
-        <span>Equipment: {job.equipment.join(', ')}</span>
+        
+        {/* Highlighted CPE placeholder */}
+        <div className="border-2 border-blue-500 rounded-lg p-3 bg-blue-50">
+          <span className="text-base font-bold text-blue-700">CPE</span>
+          <span className="block font-medium mt-1">Cisco Catalyst 4000</span>
+        </div>
       </div>
       
       {isCurrentJob && (
