@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Search, Filter, Calendar, MapPin, Clock } from 'lucide-react';
+import { Search, Filter, Calendar, MapPin, Clock, Video, AlertTriangle, Watch } from 'lucide-react';
 
 const WorkHistory = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,7 +17,13 @@ const WorkHistory = () => {
       solution: 'Updated router firmware to v2.1.4 and reconfigured DHCP settings. Issue was caused by outdated firmware conflicting with new ISP settings.',
       toolsUsed: ['Ethernet tester', 'Router', 'Laptop'],
       customerRating: 5,
-      notes: 'Customer very satisfied. Provided additional network optimization tips.'
+      notes: 'Customer very satisfied. Provided additional network optimization tips.',
+      videoUrl: '/videos/job-001-repair.mp4',
+      aiNotes: 'Worker followed proper safety protocols. Configuration completed without issues. Customer educated on basic troubleshooting.',
+      smartwatchAlerts: [
+        { time: '14:23', type: 'movement', severity: 'low', description: 'Sudden movement detected while handling router - no damage' },
+        { time: '15:45', type: 'heart_rate', severity: 'normal', description: 'Elevated heart rate during complex configuration - within normal range' }
+      ]
     },
     {
       id: 'job-002',
@@ -29,7 +35,13 @@ const WorkHistory = () => {
       solution: 'Installed new fiber optic line from street to building. Configured ONT and tested speeds. Achieved 940 Mbps down / 880 Mbps up.',
       toolsUsed: ['Fiber tools', 'Splice kit', 'OTDR', 'Power meter'],
       customerRating: 5,
-      notes: 'Clean installation. Customer upgraded from 50 Mbps DSL.'
+      notes: 'Clean installation. Customer upgraded from 50 Mbps DSL.',
+      videoUrl: '/videos/job-002-repair.mp4',
+      aiNotes: 'Excellent fiber splicing technique demonstrated. All safety procedures followed correctly. Installation completed ahead of schedule.',
+      smartwatchAlerts: [
+        { time: '09:15', type: 'fall', severity: 'medium', description: 'Potential slip detected while climbing ladder - worker recovered safely' },
+        { time: '11:30', type: 'impact', severity: 'low', description: 'Minor impact detected on hand - likely tool contact, no injury reported' }
+      ]
     },
     {
       id: 'job-003',
@@ -41,7 +53,12 @@ const WorkHistory = () => {
       solution: 'Replaced failed 24-port switch with new enterprise-grade model. All ports tested and labeled. Network performance restored.',
       toolsUsed: ['Switch', 'Cable tester', 'Laptop', 'Label maker'],
       customerRating: 4,
-      notes: 'Minimal downtime. Completed during lunch break as requested.'
+      notes: 'Minimal downtime. Completed during lunch break as requested.',
+      videoUrl: '/videos/job-003-repair.mp4',
+      aiNotes: 'Efficient switch replacement. Proper cable management maintained. All connections verified before completion.',
+      smartwatchAlerts: [
+        { time: '12:10', type: 'posture', severity: 'low', description: 'Poor posture detected while working under desk - corrected after alert' }
+      ]
     },
     {
       id: 'job-004',
@@ -53,7 +70,13 @@ const WorkHistory = () => {
       solution: 'Installed 2 additional access points to eliminate dead zones. Configured mesh network and optimized channel selection.',
       toolsUsed: ['Access points', 'Wi-Fi analyzer', 'Drill', 'Cable tools'],
       customerRating: 5,
-      notes: 'Store now has full Wi-Fi coverage. Staff very happy with improvement.'
+      notes: 'Store now has full Wi-Fi coverage. Staff very happy with improvement.',
+      videoUrl: '/videos/job-004-repair.mp4',
+      aiNotes: 'Strategic access point placement achieved optimal coverage. Worker demonstrated excellent problem-solving skills.',
+      smartwatchAlerts: [
+        { time: '10:45', type: 'movement', severity: 'high', description: 'Sharp jerking motion detected while drilling - equipment safety check recommended' },
+        { time: '13:20', type: 'temperature', severity: 'medium', description: 'Elevated body temperature due to physical work - worker took appropriate break' }
+      ]
     }
   ];
 
@@ -63,6 +86,27 @@ const WorkHistory = () => {
     const matchesFilter = selectedFilter === 'all' || job.status === selectedFilter;
     return matchesSearch && matchesFilter;
   });
+
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case 'high': return 'text-red-600 bg-red-50';
+      case 'medium': return 'text-orange-600 bg-orange-50';
+      case 'low': return 'text-yellow-600 bg-yellow-50';
+      default: return 'text-green-600 bg-green-50';
+    }
+  };
+
+  const getSeverityIcon = (type: string) => {
+    switch (type) {
+      case 'fall':
+      case 'impact':
+      case 'movement': return <AlertTriangle className="h-4 w-4" />;
+      case 'heart_rate':
+      case 'temperature':
+      case 'posture': return <Watch className="h-4 w-4" />;
+      default: return <AlertTriangle className="h-4 w-4" />;
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -140,7 +184,7 @@ const WorkHistory = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Solution Applied</h4>
                     <p className="text-gray-700 bg-green-50 p-3 rounded-md">{job.solution}</p>
@@ -160,6 +204,67 @@ const WorkHistory = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Video and AI Notes Section */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-2 flex items-center">
+                      <Video className="h-4 w-4 mr-2" />
+                      Repair Video
+                    </h4>
+                    <a
+                      href={job.videoUrl}
+                      className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+                    >
+                      <Video className="h-4 w-4 mr-2" />
+                      Watch Repair Video
+                    </a>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium text-gray-900 mb-2">AI Observations</h4>
+                    <p className="text-gray-700 bg-blue-50 p-3 rounded-md">{job.aiNotes}</p>
+                  </div>
+                </div>
+
+                {/* Smartwatch Alerts */}
+                {job.smartwatchAlerts && job.smartwatchAlerts.length > 0 && (
+                  <div className="mb-4">
+                    <h4 className="font-medium text-gray-900 mb-2 flex items-center">
+                      <Watch className="h-4 w-4 mr-2" />
+                      Smartwatch Incident Reports
+                    </h4>
+                    <div className="space-y-2">
+                      {job.smartwatchAlerts.map((alert, index) => (
+                        <div
+                          key={index}
+                          className={`flex items-start p-3 rounded-md border-l-4 ${
+                            alert.severity === 'high'
+                              ? 'border-l-red-500 bg-red-50'
+                              : alert.severity === 'medium'
+                              ? 'border-l-orange-500 bg-orange-50'
+                              : 'border-l-yellow-500 bg-yellow-50'
+                          }`}
+                        >
+                          <div className={`mr-3 mt-0.5 ${getSeverityColor(alert.severity)} p-1 rounded`}>
+                            {getSeverityIcon(alert.type)}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center justify-between">
+                              <span className="text-sm font-medium text-gray-900">
+                                {alert.time} - {alert.type.replace('_', ' ').toUpperCase()}
+                              </span>
+                              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(alert.severity)}`}>
+                                {alert.severity}
+                              </span>
+                            </div>
+                            <p className="text-sm text-gray-700 mt-1">{alert.description}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {job.notes && (
                   <div className="mt-4">
