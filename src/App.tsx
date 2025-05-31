@@ -11,6 +11,7 @@ import Tools from "./pages/Tools";
 import ARSession from "./pages/ARSession";
 import Sitemap from "./pages/Sitemap";
 import KnowledgeBase from "./pages/KnowledgeBase";
+import TaskConfirmation from "./pages/TaskConfirmation";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/tools" element={<Tools />} />
             <Route path="/sitemap" element={<Sitemap />} />
             <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/task-confirmation" element={<TaskConfirmation />} />
             <Route path="/ar-session" element={<ARSession />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

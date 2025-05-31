@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import JobCard from '../components/JobCard';
-import { FileText, Clock, CheckCircle, AlertTriangle, Book } from 'lucide-react';
+import { FileText, Clock, CheckCircle, AlertTriangle, Book, Map, Wrench, Camera } from 'lucide-react';
 
 const Dashboard = () => {
   const [currentJob] = useState({
@@ -86,6 +86,44 @@ const Dashboard = () => {
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Current Job</h2>
             <JobCard job={currentJob} isCurrentJob={true} />
             
+            {/* Job-Specific Navigation */}
+            <div className="mt-6 bg-white rounded-lg shadow p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Job Resources for {currentJob.workId}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Link
+                  to="/sitemap"
+                  className="flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
+                >
+                  <Map className="h-5 w-5 mr-2" />
+                  Venue Sitemap
+                </Link>
+                <Link
+                  to="/tools"
+                  className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
+                >
+                  <Wrench className="h-5 w-5 mr-2" />
+                  Required Tools
+                </Link>
+                <Link
+                  to="/task-confirmation"
+                  className="flex items-center justify-center bg-purple-500 hover:bg-purple-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
+                >
+                  <Camera className="h-5 w-5 mr-2" />
+                  Task Confirmation
+                </Link>
+                <Link
+                  to="/knowledge-base"
+                  className="flex items-center justify-center bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
+                >
+                  <Book className="h-5 w-5 mr-2" />
+                  Knowledge Base
+                </Link>
+              </div>
+              <p className="text-sm text-gray-600 mt-3 text-center">
+                Access job-specific resources and documentation
+              </p>
+            </div>
+            
             <h2 className="text-xl font-semibold text-gray-900 mb-4 mt-8">Recent Work</h2>
             <div className="space-y-4">
               {recentJobs.map((job) => (
@@ -94,22 +132,8 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Instructions and Knowledge Base */}
+          {/* Instructions */}
           <div>
-            {/* Knowledge Base Button */}
-            <div className="mb-6">
-              <Link
-                to="/knowledge-base"
-                className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
-              >
-                <Book className="h-5 w-5 mr-2" />
-                Access Knowledge Base
-              </Link>
-              <p className="text-sm text-gray-600 mt-2 text-center">
-                Router guides, troubleshooting, and repair procedures
-              </p>
-            </div>
-
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Job Instructions</h2>
             <div className="bg-white rounded-lg shadow p-6">
               <ul className="space-y-3">
