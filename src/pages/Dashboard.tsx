@@ -1,39 +1,43 @@
-
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import JobCard from '../components/JobCard';
-import { FileText, Clock, CheckCircle, AlertTriangle } from 'lucide-react';
+import { FileText, Clock, CheckCircle, AlertTriangle, Book } from 'lucide-react';
 
 const Dashboard = () => {
   const [currentJob] = useState({
     id: 'job-001',
+    workId: 'WO-2024-001',
     title: 'Router Configuration Issue',
     location: '123 Business Plaza, Suite 450',
     priority: 'high' as const,
     status: 'in-progress' as const,
     estimatedTime: '2-3 hours',
-    description: 'Customer reports intermittent internet connectivity. Previous tech noted possible router firmware issue. Check configuration and update if necessary.',
-    equipment: ['Ethernet tester', 'Router', 'Laptop']
+    description: 'Customer reports intermittent internet connectivity during peak hours. Previous tech noted possible router firmware issue and DHCP pool exhaustion. Router LED occasionally flashing amber. Check configuration, update firmware if necessary, and optimize DHCP settings.',
+    equipment: ['Ethernet tester', 'Router', 'Laptop'],
+    humanNotes: 'Customer mentioned connectivity issues started after office expansion. Approximately 40+ devices now connected. Router appears to struggle during morning hours (9-11 AM) when most staff arrive.'
   });
 
   const [recentJobs] = useState([
     {
       id: 'job-002',
+      workId: 'WO-2024-002',
       title: 'Fiber Optic Installation',
       location: '456 Tech Park Dr',
       priority: 'medium' as const,
       status: 'completed' as const,
       estimatedTime: '4 hours',
-      description: 'New fiber installation completed successfully. Customer satisfied with speed improvements.',
+      description: 'New fiber installation completed successfully. Customer satisfied with speed improvements from 50 Mbps DSL to 940 Mbps fiber.',
       equipment: ['Fiber tools', 'Splice kit', 'OTDR']
     },
     {
       id: 'job-003',
+      workId: 'WO-2024-003',
       title: 'Network Switch Replacement',
       location: '789 Corporate Blvd',
       priority: 'low' as const,
       status: 'completed' as const,
       estimatedTime: '1 hour',
-      description: 'Replaced faulty 24-port switch. All ports tested and verified.',
+      description: 'Replaced faulty 24-port switch with enterprise-grade model. All ports tested and verified. Minimal downtime during lunch break.',
       equipment: ['Switch', 'Cable tester', 'Laptop']
     }
   ]);
@@ -90,8 +94,22 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Instructions */}
+          {/* Instructions and Knowledge Base */}
           <div>
+            {/* Knowledge Base Button */}
+            <div className="mb-6">
+              <Link
+                to="/knowledge-base"
+                className="flex items-center justify-center w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-4 rounded-lg transition-colors shadow-md"
+              >
+                <Book className="h-5 w-5 mr-2" />
+                Access Knowledge Base
+              </Link>
+              <p className="text-sm text-gray-600 mt-2 text-center">
+                Router guides, troubleshooting, and repair procedures
+              </p>
+            </div>
+
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Job Instructions</h2>
             <div className="bg-white rounded-lg shadow p-6">
               <ul className="space-y-3">

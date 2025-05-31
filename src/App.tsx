@@ -10,6 +10,7 @@ import WorkHistory from "./pages/WorkHistory";
 import Tools from "./pages/Tools";
 import ARSession from "./pages/ARSession";
 import Sitemap from "./pages/Sitemap";
+import KnowledgeBase from "./pages/KnowledgeBase";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,8 +27,9 @@ const App = () => (
             <Route path="/" element={<Dashboard />} />
             <Route path="/work-history" element={<WorkHistory />} />
             <Route path="/tools" element={<Tools />} />
-            <Route path="/ar-session" element={<ARSession />} />
             <Route path="/sitemap" element={<Sitemap />} />
+            <Route path="/knowledge-base" element={<KnowledgeBase />} />
+            <Route path="/ar-session" element={<ARSession />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>

@@ -1,8 +1,8 @@
-
-import { Clock, MapPin, AlertCircle, CheckCircle } from 'lucide-react';
+import { Clock, MapPin, AlertCircle, CheckCircle, FileText } from 'lucide-react';
 
 interface Job {
   id: string;
+  workId?: string;
   title: string;
   location: string;
   priority: 'low' | 'medium' | 'high' | 'urgent';
@@ -10,6 +10,7 @@ interface Job {
   estimatedTime: string;
   description: string;
   equipment: string[];
+  humanNotes?: string;
 }
 
 interface JobCardProps {
@@ -41,7 +42,14 @@ const JobCard = ({ job, isCurrentJob = false }: JobCardProps) => {
     }`}>
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900">{job.title}</h3>
+          <div className="flex items-center space-x-2 mb-1">
+            <h3 className="text-lg font-semibold text-gray-900">{job.title}</h3>
+            {job.workId && (
+              <span className="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs font-mono">
+                {job.workId}
+              </span>
+            )}
+          </div>
           <div className="flex items-center text-gray-600 mt-1">
             <MapPin className="h-4 w-4 mr-1" />
             <span className="text-sm">{job.location}</span>
@@ -56,6 +64,16 @@ const JobCard = ({ job, isCurrentJob = false }: JobCardProps) => {
       </div>
       
       <p className="text-gray-700 mb-4">{job.description}</p>
+      
+      {job.humanNotes && (
+        <div className="mb-4 p-3 bg-blue-50 rounded-md">
+          <h4 className="font-medium text-blue-900 mb-1 flex items-center text-sm">
+            <FileText className="h-4 w-4 mr-1" />
+            Field Notes
+          </h4>
+          <p className="text-sm text-blue-800">{job.humanNotes}</p>
+        </div>
+      )}
       
       <div className="flex items-center justify-between text-sm text-gray-500">
         <div className="flex items-center">
