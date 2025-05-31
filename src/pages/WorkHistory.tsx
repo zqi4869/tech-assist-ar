@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Search, Filter, Calendar, MapPin, Clock, Video, AlertTriangle, Watch } from 'lucide-react';
 
@@ -23,7 +22,8 @@ const WorkHistory = () => {
       smartwatchAlerts: [
         { time: '14:23', type: 'movement', severity: 'low', description: 'Sudden movement detected while handling router - no damage' },
         { time: '15:45', type: 'heart_rate', severity: 'normal', description: 'Elevated heart rate during complex configuration - within normal range' }
-      ]
+      ],
+      cpe: { name: 'Netgear Nighthawk X6', type: 'Router' }
     },
     {
       id: 'job-002',
@@ -41,7 +41,8 @@ const WorkHistory = () => {
       smartwatchAlerts: [
         { time: '09:15', type: 'fall', severity: 'medium', description: 'Potential slip detected while climbing ladder - worker recovered safely' },
         { time: '11:30', type: 'impact', severity: 'low', description: 'Minor impact detected on hand - likely tool contact, no injury reported' }
-      ]
+      ],
+      cpe: { name: 'Huawei EchoLife HG8245H', type: 'ONT' }
     },
     {
       id: 'job-003',
@@ -58,7 +59,8 @@ const WorkHistory = () => {
       aiNotes: 'Efficient switch replacement. Proper cable management maintained. All connections verified before completion.',
       smartwatchAlerts: [
         { time: '12:10', type: 'posture', severity: 'low', description: 'Poor posture detected while working under desk - corrected after alert' }
-      ]
+      ],
+      cpe: { name: 'HP Aruba 2530-24G', type: 'Switch' }
     },
     {
       id: 'job-004',
@@ -76,7 +78,8 @@ const WorkHistory = () => {
       smartwatchAlerts: [
         { time: '10:45', type: 'movement', severity: 'high', description: 'Sharp jerking motion detected while drilling - equipment safety check recommended' },
         { time: '13:20', type: 'temperature', severity: 'medium', description: 'Elevated body temperature due to physical work - worker took appropriate break' }
-      ]
+      ],
+      cpe: { name: 'Ubiquiti UniFi AP AC Pro', type: 'Access Point' }
     }
   ];
 
@@ -189,7 +192,6 @@ const WorkHistory = () => {
                     <h4 className="font-medium text-gray-900 mb-2">Solution Applied</h4>
                     <p className="text-gray-700 bg-green-50 p-3 rounded-md">{job.solution}</p>
                   </div>
-                  
                   <div>
                     <h4 className="font-medium text-gray-900 mb-2">Tools Used</h4>
                     <div className="flex flex-wrap gap-2">
@@ -202,6 +204,14 @@ const WorkHistory = () => {
                         </span>
                       ))}
                     </div>
+                  </div>
+                </div>
+
+                {/* CPE Section */}
+                <div className="mb-6">
+                  <div className="border-2 border-blue-500 rounded-lg p-3 bg-blue-50 inline-block">
+                    <span className="text-base font-bold text-blue-700 mr-2">CPE</span>
+                    <span className="block font-medium mt-1">{job.cpe?.name || 'N/A'} <span className="text-xs text-gray-500">({job.cpe?.type || 'N/A'})</span></span>
                   </div>
                 </div>
 

@@ -135,6 +135,10 @@ const Dashboard = () => {
           {/* Instructions */}
           <div>
             <h2 className="text-xl font-semibold text-gray-900 mb-4">Job Instructions</h2>
+            <div className="mb-4 bg-red-100 border-l-4 border-red-400 rounded-lg p-4">
+              <span className="font-bold text-red-700">Safety Warning:</span>
+              <span className="ml-2 text-red-800">High EMI area. Take precautions.</span>
+            </div>
             <div className="bg-white rounded-lg shadow p-6">
               <ul className="space-y-3">
                 {instructions.map((instruction, index) => (
