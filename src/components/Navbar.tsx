@@ -1,6 +1,6 @@
 
 import { Link, useLocation } from 'react-router-dom';
-import { Wrench, History, Glasses, ClipboardList } from 'lucide-react';
+import { Wrench, History, Glasses, ClipboardList, Map } from 'lucide-react';
 
 const Navbar = () => {
   const location = useLocation();
@@ -11,6 +11,7 @@ const Navbar = () => {
     { path: '/', label: 'Dashboard', icon: ClipboardList },
     { path: '/work-history', label: 'Work History', icon: History },
     { path: '/tools', label: 'Tools', icon: Wrench },
+    { path: '/sitemap', label: 'Sitemap', icon: Map },
     { path: '/ar-session', label: 'AR Session', icon: Glasses },
   ];
 
